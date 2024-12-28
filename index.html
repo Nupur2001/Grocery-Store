@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Grocery Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('/Users/mayank/Documents/tcsProject/Desktop - 1 (1).png');
+    
+            background-size: cover; /* or contain, or specific dimensions */
+            background-repeat: no-repeat;
+            background-position: center center;
+
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 15px 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        .content-container {
+            display: flex;
+            width: 100%;
+        }
+
+        .product-container {
+            flex: 1;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            flex-direction: row;
+        }
+
+        .product {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 200px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #cartSummary {
+            flex: 1;
+            margin-top: 20px;
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #summary {
+            margin-top: 10px;
+        }
+
+        #summary button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#" onclick="redirectToHome()">Home</a></li>
+            <li><a href="#" onclick="redirectToProfile()">My Profile</a></li>
+            <li><a href="#" onclick="redirectToCart()">My Cart</a></li>
+            <li><a href="#" onclick="checkout()">Checkout</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <h2>Hello <span id="userName"></span>, Welcome to Online Grocery Store</h2>
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Product Display -->
+        <div class="product-container">
+            <!-- Product 1 -->
+            <div class="product">
+                <img src="/Users/mayank/Documents/tcsProject/tea.png" alt="Masala Tea Image" style="width: 75%; height: 150px; object-fit: cover;">
+                <p>Masala Tea</p>
+                <p>Price: ₹10.00</p>
+                <button onclick="addToCart('Masala Tea', 10.00)">Add to Cart</button>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product">
+                <img src="/Users/mayank/Documents/tcsProject/green-tea.png" alt="Green Tea Image" style="width: 75%; height: 150px; object-fit: cover;">
+                <p>Green Tea</p>
+                <p>Price: ₹15.00</p>
+                <button onclick="addToCart('Green Tea', 15.00)">Add to Cart</button>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product">
+                <img src="/Users/mayank/Documents/tcsProject/ramen.png" alt="Veg Noodles Image" style="width: 75%; height: 150px; object-fit: cover;">
+                <p>Veg Noodles</p>
+                <p>Price: ₹20.00</p>
+                <button onclick="addToCart('Veg Noodles', 20.00)">Add to Cart</button>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product">
+                <img src="/Users/mayank/Documents/tcsProject/pineapple.png" alt="Pineapple Image" style="width: 75%; height: 150px; object-fit: cover;">
+                <p>Pineapple</p>
+                <p>Price: ₹8.00</p>
+                <button onclick="addToCart('Pineapple', 8.00)">Add to Cart</button>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product">
+                <img src="/Users/mayank/Documents/tcsProject/pizza.png" alt="Pizza Image" style="width: 75%; height: 150px; object-fit: cover;">
+                <p>Pizza</p>
+                <p>Price: ₹12.00</p>
+                <button onclick="addToCart('Pizza', 12.00)">Add to Cart</button>
+            </div>
+            
+            <!-- Add more products as needed -->
+        </div>
+
+        <!-- Placeholder for Cart Summary -->
+        <div id="cartSummary" style="display: none;">
+            <h2>Shopping Cart Summary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="cartProducts"></tbody>
+            </table>
+            <div id="summary">
+                <p>Total Amount: ₹<span id="totalAmount">0.00</span></p>
+                <button onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to add a product to the cart
+        function addToCart(productName, productPrice) {
+            // Create a new item for the cart
+            var cartItem = {
+                name: productName,
+                price: productPrice
+            };
+
+            // Get the cart from local storage or create an empty one
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Add the item to the cart
+            cart.push(cartItem);
+
+            // Save the updated cart back to local storage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Update the cart summary display
+            updateCartSummary();
+
+            // Provide feedback to the user (you may customize this part)
+            alert(productName + " added to cart!");
+        }
+
+        // Function to update the cart summary display
+        function updateCartSummary() {
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            var cartProducts = document.getElementById('cartProducts');
+            var totalAmount = 0;
+
+            // Clear previous content
+            cartProducts.innerHTML = '';
+
+            // Display each item in the cart using a table
+            cart.forEach(function(item, index) {
+                var cartItemRow = document.createElement('tr');
+                cartItemRow.innerHTML = '<td>' + item.name + '</td><td>₹' + item.price.toFixed(2) + '</td>' +
+                    '<td><button class="delete-btn" onclick="deleteCartItem(' + index + ')">Delete</button></td>';
+                cartProducts.appendChild(cartItemRow);
+
+                // Accumulate total amount
+                totalAmount += item.price;
+            });
+
+            // Update total amount in the summary
+            document.getElementById('totalAmount').innerText = totalAmount.toFixed(2);
+        }
+
+        // Function to delete a product from the cart
+        function deleteCartItem(index) {
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Remove the item at the specified index
+            cart.splice(index, 1);
+
+            // Save the updated cart back to local storage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Update the cart summary display
+            updateCartSummary();
+        }
+
+        // Placeholder functions, replace with actual implementation
+        function redirectToHome() {
+            window.location.href = "/Users/mayank/Documents/tcsProject/home_page.html";
+        }
+
+        function redirectToProfile() {
+            alert("Redirecting to My Profile");
+            window.location.href = "/Users/mayank/Documents/tcsProject/myprofile.html";
+        }
+
+        function redirectToCart() {
+            // Display the cart summary
+            document.getElementById('cartSummary').style.display = 'block';
+
+            // Update the cart summary display
+            updateCartSummary();
+        }
+
+        function checkout() {
+            alert("Proceeding to Checkout");
+        }
+
+        function logout() {
+            window.location.href = "/Users/mayank/Documents/tcsProject/login_page.html";
+        }
+
+        // Function to display the customer name
+        function displayCustomerName() {
+            var customerName = "Mayank";
+            document.getElementById("userName").innerText = customerName;
+        }
+
+        // Call the function to display the customer name
+        displayCustomerName();
+    </script>
+
+</body>
+</html>

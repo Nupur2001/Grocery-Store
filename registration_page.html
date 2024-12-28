@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration</title>
+    <style>
+        body {
+            background-image: url('/Users/mayank/Documents/tcsProject/Desktop - 1 (1).png');
+    
+            background-size: cover; /* or contain, or specific dimensions */
+            background-repeat: no-repeat;
+            background-position: center center;
+
+
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+            max-width: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        textarea {
+            resize: vertical; /* Allow vertical resizing of the textarea */
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #acknowledgment {
+            display: none;
+            max-width: 400px;
+            width: 100%;
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(152, 139, 238, 0.1);
+            text-align: center;
+        }
+
+        #acknowledgment p {
+            margin: 10px 0;
+        }
+
+        #acknowledgment p:first-child {
+            color: green;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <form id="registrationForm">
+            <h2 style="text-align: center;">Register Yourself</h2>
+
+            <label for="customerName">Customer Name:</label>
+            <input type="text" id="customerName" maxlength="50" required pattern="[A-Za-z ]+">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" maxlength="30" required pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{5,}$">
+
+            <label for="address">Address (max 100 characters):</label>
+            <textarea id="address" maxlength="100" required></textarea>
+
+            <label for="contactNumber">Contact Number:</label>
+            <input type="tel" id="contactNumber" maxlength="10" required pattern="[0-9]+">
+
+            <button type="button" onclick="registerCustomer()">Register</button>
+            <button type="loginButton" onclick="redirectToLogin()">Already have Account? Login</button>
+        </form>
+
+        <div id="acknowledgment">
+            <p>Registration successful!</p>
+            <p>Customer ID: <span id="customerId"></span></p>
+            <p>Customer Name: <span id="ackCustomerName"></span></p>
+            <p>Email: <span id="ackEmail"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function registerCustomer() {
+        var customerName = document.getElementById("customerName").value;
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var address = document.getElementById("address").value;
+        var contactNumber = document.getElementById("contactNumber").value;
+
+        if (!/^[A-Za-z]+$/.test(customerName)) {
+            alert("Customer name must be alphabet only.");
+            return;
+        }
+
+        if (!/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+            alert("Email ID not valid.");
+            return;
+        }
+
+        if (!/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{5,}$/.test(password)) {
+            alert("Password is not matching the criteria.");
+            return;
+        }
+
+        if (!address.trim()) {
+            alert("Address field must not be null or blank.");
+            return;
+        }
+
+        if (!/^[0-9]+$/.test(contactNumber)) {
+            alert("Contact number must not contain any alphabet.");
+            return;
+        }
+
+        // For demonstration purposes, generating a random customer ID
+        var customerId = Math.floor(Math.random() * 1000000);
+
+        // Display acknowledgment screen
+        document.getElementById("acknowledgment").style.display = "block";
+        document.getElementById("customerId").innerText = customerId;
+        document.getElementById("ackCustomerName").innerText = customerName;
+        document.getElementById("ackEmail").innerText = email;
+    }
+
+    function redirectToLogin() {
+            // Redirect to login.html
+            window.location.href = "/Users/mayank/Documents/tcsProject/login_page.html";
+        }
+    
+    </script>
+
+</body>
+</html>

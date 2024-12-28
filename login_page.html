@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            background-image: url('/Users/mayank/Documents/tcsProject/Desktop - 1 (1).png');
+    
+            background-size: cover; /* or contain, or specific dimensions */
+            background-repeat: no-repeat;
+            background-position: center center;
+
+            
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #loginButton {
+            background-color: #3498db;
+            color: #fff;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: 0.25s;
+            margin-top: 10px;
+        }
+
+        #loginButton:hover {
+            background-color: #2980b9;
+        }
+
+        #loginMessage {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <form id="loginForm">
+            <h2 style="text-align: center;">Login</h2>
+
+            <label for="customerId">Customer ID:</label>
+            <input type="text" id="customerId" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" maxlength="30" required>
+
+            <button type="button" onclick="login()">Login</button>
+        </form>
+
+        <div id="loginMessage"></div>
+        <button id="loginButton" onclick="redirectToLogin()">Don't have an account? Register</button>
+    </div>
+
+    <!-- <script src="/Users/mayank/Documents/tcsProject/login.js"></script> -->
+
+    <script>
+        
+        function redirectToLogin() {
+            // Redirect to login.html
+            window.location.href = "/Users/mayank/Documents/tcsProject/registration_page.html";
+        }
+
+        function login() {
+            // Dummy customer data for demonstration
+            var tempCustomerId = "123456";
+            var tempPassword = "Password@1234";
+
+            // Fetch user input
+            var enteredId = document.getElementById("customerId").value;
+            var enteredPassword = document.getElementById("password").value;
+
+            // Check if the entered ID and password match the dummy data
+            if(enteredId == ''){
+                alert("Please Enter Customer ID");
+            }
+            else if (enteredPassword == ''){
+                alert("Please Enter Password");
+            }
+            else if (enteredId === tempCustomerId && enteredPassword === tempPassword) {
+                // Successful login, redirect to Home Page
+                window.location.href = "home_page.html"; // Replace with your actual Home Page URL
+            } else if (enteredId !== tempCustomerId && enteredPassword !== tempPassword) {
+                document.getElementById("loginMessage").innerText = "ID/password not valid.";
+            } else if (enteredId !== tempCustomerId) {
+                document.getElementById("loginMessage").innerText = "ID not valid.";
+            } else if (enteredPassword !== tempPassword) {
+                document.getElementById("loginMessage").innerText = "Password not valid.";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<body>
+
+    <h2>Login</h2>
+
+    <form id="loginForm">
+        <label for="customerId">Customer ID:</label>
+        <input type="text" id="customerId" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" maxlength="30" required><br>
+
+        <button type="button" onclick="login()">Login</button>
+    </form>
+
+    <div id="loginMessage" style="color: red;"></div>  
+        
+    <script src="/Users/mayank/Documents/tcsProject/login.js"> </script>
+
+</body>
+</html> -->
